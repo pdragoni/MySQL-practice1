@@ -19,7 +19,7 @@ CREATE TABLE usuario(
   FOREIGN KEY (plano_id) REFERENCES offered_plans(id)
 ) engine = InnoDB;
 
-CREATE TABLE artistas(
+CREATE TABLE artists(
   id INT PRIMARY KEY AUTO_INCREMENT,
   nome VARCHAR (100) NOT NULL
 ) engine = InnoDB;
@@ -27,9 +27,9 @@ CREATE TABLE artistas(
 CREATE TABLE albuns(
   id INT PRIMARY KEY AUTO_INCREMENT,
 	album VARCHAR (100) NOT NULL,
-  ano_lancamento INT NOT NULL,
-  artista_id INT NOT NULL,
-  FOREIGN KEY (artista_id) REFERENCES artistas(id)
+  release_year INT NOT NULL,
+  artist_id INT NOT NULL,
+  FOREIGN KEY (artist_id) REFERENCES artists(id)
 ) engine = InnoDB;
 
 CREATE TABLE cancoes(
@@ -50,12 +50,12 @@ CREATE TABLE reproducoes_por_usuario(
   PRIMARY KEY (data_reproducao, usuario_id, cancoes_id)
 ) engine=InnoDB;
 
-CREATE TABLE seguindo_artistas(
+CREATE TABLE following_artists(
   usuario_id INT NOT NULL,
-  artista_id INT NOT NULL,
+  artist_id INT NOT NULL,
   FOREIGN KEY (usuario_id) REFERENCES usuario(id),
-  FOREIGN KEY (artista_id) REFERENCES artistas(id),
-  PRIMARY KEY (usuario_id, artista_id)
+  FOREIGN KEY (artist_id) REFERENCES artists(id),
+  PRIMARY KEY (usuario_id, artist_id)
 ) engine=InnoDB;
 
 INSERT INTO offered_plans(id, plano, valor_plano)
@@ -78,7 +78,7 @@ VALUES
 ('Angelina', 42, '2018-04-29', 2),
 ('Paul', 46, '2017-01-17', 2);
 
-INSERT INTO artistas(id, nome)
+INSERT INTO artists(id, nome)
 VALUES
 (1, 'Walter Phoenix'),
 (2, 'Peter Strong'),
@@ -87,7 +87,7 @@ VALUES
 (5, 'Tyler Isle'),
 (6, 'Fog');
 
-INSERT INTO albuns(id, album, ano_lancamento, artista_id)
+INSERT INTO albuns(id, album, release_year, artist_id)
 VALUES
 (1, 'Envious', 1990, 1),
 (2, 'Exuberant', 1993, 1),
@@ -184,7 +184,7 @@ VALUES
 ('2017-07-27 05:24:49', 10, 12),
 ('2017-12-25 01:03:57', 10, 13);
 
-INSERT INTO seguindo_artistas(usuario_id, artista_id)
+INSERT INTO following_artists(usuario_id, artist_id)
 VALUES
 (1, 1),
 (1, 4),
