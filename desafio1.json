@@ -11,6 +11,6 @@
   "tabela_que_contem_artista": "artists",
   "coluna_album": "album",
   "tabela_que_contem_album": "albuns",
-  "coluna_cancoes": "cancao",
+  "coluna_cancoes": "song",
   "tabela_que_contem_cancoes": "cancoes"
 }

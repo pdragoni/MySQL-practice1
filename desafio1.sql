@@ -7,16 +7,16 @@ USE SpotifyClone;
 CREATE TABLE offered_plans(
   id INT PRIMARY KEY AUTO_INCREMENT,
 	plano VARCHAR (100) NOT NULL,
-  valor_plano DECIMAL(3,2) NOT NULL
+  prices DECIMAL(3,2) NOT NULL
 ) engine = InnoDB;
 
 CREATE TABLE usuario(
   id INT PRIMARY KEY AUTO_INCREMENT,
 	nome VARCHAR (100) NOT NULL,
-  idade INT NOT NULL,
+  age INT NOT NULL,
   data_assinatura TIMESTAMP DEFAULT NOW(),
-  plano_id INT NOT NULL,
-  FOREIGN KEY (plano_id) REFERENCES offered_plans(id)
+  plan_id INT NOT NULL,
+  FOREIGN KEY (plan_id) REFERENCES offered_plans(id)
 ) engine = InnoDB;
 
 CREATE TABLE artists(
@@ -34,8 +34,8 @@ CREATE TABLE albuns(
 
 CREATE TABLE cancoes(
   id INT PRIMARY KEY AUTO_INCREMENT,
-	cancao VARCHAR (100) NOT NULL,
-  duracao_segundos INT NOT NULL,
+	song VARCHAR (100) NOT NULL,
+  duration INT NOT NULL,
   data_assinatura TIMESTAMP DEFAULT NOW(),
   album_id INT NOT NULL,
   FOREIGN KEY (album_id) REFERENCES albuns(id)
@@ -44,10 +44,10 @@ CREATE TABLE cancoes(
 CREATE TABLE reproducoes_por_usuario(
   data_reproducao DATETIME NOT NULL,
   usuario_id INT NOT NULL,
-  cancoes_id INT NOT NULL,
+  songs_id INT NOT NULL,
   FOREIGN KEY (usuario_id) REFERENCES usuario(id),
-  FOREIGN KEY (cancoes_id) REFERENCES cancoes(id),
-  PRIMARY KEY (data_reproducao, usuario_id, cancoes_id)
+  FOREIGN KEY (songs_id) REFERENCES cancoes(id),
+  PRIMARY KEY (data_reproducao, usuario_id, songs_id)
 ) engine=InnoDB;
 
 CREATE TABLE following_artists(
@@ -58,14 +58,14 @@ CREATE TABLE following_artists(
   PRIMARY KEY (usuario_id, artist_id)
 ) engine=InnoDB;
 
-INSERT INTO offered_plans(id, plano, valor_plano)
+INSERT INTO offered_plans(id, plano, prices)
 VALUES
 (1, 'gratuito',0),
 (2, 'familiar', 7.99),
 (3, 'universitário', 5.99),
 (4,	'pessoal',	6.99);
 
-INSERT INTO usuario(nome, idade, data_assinatura, plano_id)
+INSERT INTO usuario(nome, age, data_assinatura, plan_id)
 VALUES
 ('Thati', 23, '2019-10-20', 1),
 ('Cintia', 35, '2017-12-30', 2),
@@ -100,7 +100,7 @@ VALUES
 (9, 'No guarantees', 2015, 5),
 (10, 'Apparatus', 2015, 6);
 
-INSERT INTO cancoes(id, cancao, duracao_segundos, album_id)
+INSERT INTO cancoes(id, song, duration, album_id)
 VALUES
 (1, 'Soul For Us', 200, 1),
 (2, 'Reflections Of Magic', 163, 1),
@@ -143,7 +143,7 @@ VALUES
 (39, 'Baby', 136, 10),
 (40, 'You Make Me Feel So.', 83, 10);
 
-INSERT INTO reproducoes_por_usuario(data_reproducao, usuario_id, cancoes_id)
+INSERT INTO reproducoes_por_usuario(data_reproducao, usuario_id, songs_id)
 VALUES
 ('2020-02-28 10:45:55', 1, 36),
 ('2020-05-02 05:30:35', 1, 25),
