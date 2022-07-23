@@ -1,9 +1,10 @@
-DROP DATABASE IF EXISTS 
+DROP DATABASE IF EXISTS SpotifyClone;
 
-CREATE DATABASE 
+CREATE DATABASE SpotifyClone;
 
-USE 
-CREATE TABLE plano_usuario(
+USE SpotifyClone;
+
+CREATE TABLE offered_plans(
   id INT PRIMARY KEY AUTO_INCREMENT,
 	plano VARCHAR (100) NOT NULL,
   valor_plano DECIMAL(3,2) NOT NULL
@@ -15,7 +16,7 @@ CREATE TABLE usuario(
   idade INT NOT NULL,
   data_assinatura TIMESTAMP DEFAULT NOW(),
   plano_id INT NOT NULL,
-  FOREIGN KEY (plano_id) REFERENCES plano_usuario(id)
+  FOREIGN KEY (plano_id) REFERENCES offered_plans(id)
 ) engine = InnoDB;
 
 CREATE TABLE artistas(
@@ -57,7 +58,7 @@ CREATE TABLE seguindo_artistas(
   PRIMARY KEY (usuario_id, artista_id)
 ) engine=InnoDB;
 
-INSERT INTO plano_usuario(id, plano, valor_plano)
+INSERT INTO offered_plans(id, plano, valor_plano)
 VALUES
 (1, 'gratuito',0),
 (2, 'familiar', 7.99),
