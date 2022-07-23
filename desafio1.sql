@@ -43,19 +43,19 @@ CREATE TABLE cancoes(
 
 CREATE TABLE reproducoes_por_usuario(
   data_reproducao DATETIME NOT NULL,
-  usuario_id INT NOT NULL,
+  user_id INT NOT NULL,
   songs_id INT NOT NULL,
-  FOREIGN KEY (usuario_id) REFERENCES usuario(id),
+  FOREIGN KEY (user_id) REFERENCES usuario(id),
   FOREIGN KEY (songs_id) REFERENCES cancoes(id),
-  PRIMARY KEY (data_reproducao, usuario_id, songs_id)
+  PRIMARY KEY (data_reproducao, user_id, songs_id)
 ) engine=InnoDB;
 
 CREATE TABLE following_artists(
-  usuario_id INT NOT NULL,
+  user_id INT NOT NULL,
   artist_id INT NOT NULL,
-  FOREIGN KEY (usuario_id) REFERENCES usuario(id),
+  FOREIGN KEY (user_id) REFERENCES usuario(id),
   FOREIGN KEY (artist_id) REFERENCES artists(id),
-  PRIMARY KEY (usuario_id, artist_id)
+  PRIMARY KEY (user_id, artist_id)
 ) engine=InnoDB;
 
 INSERT INTO offered_plans(id, plano, prices)
@@ -143,7 +143,7 @@ VALUES
 (39, 'Baby', 136, 10),
 (40, 'You Make Me Feel So.', 83, 10);
 
-INSERT INTO reproducoes_por_usuario(data_reproducao, usuario_id, songs_id)
+INSERT INTO reproducoes_por_usuario(data_reproducao, user_id, songs_id)
 VALUES
 ('2020-02-28 10:45:55', 1, 36),
 ('2020-05-02 05:30:35', 1, 25),
@@ -184,7 +184,7 @@ VALUES
 ('2017-07-27 05:24:49', 10, 12),
 ('2017-12-25 01:03:57', 10, 13);
 
-INSERT INTO following_artists(usuario_id, artist_id)
+INSERT INTO following_artists(user_id, artist_id)
 VALUES
 (1, 1),
 (1, 4),
