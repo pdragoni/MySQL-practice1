@@ -42,12 +42,12 @@ CREATE TABLE cancoes(
 ) engine = InnoDB;
 
 CREATE TABLE reproducoes_por_usuario(
-  data_reproducao DATETIME NOT NULL,
+  date_reproduction DATETIME NOT NULL,
   user_id INT NOT NULL,
   songs_id INT NOT NULL,
   FOREIGN KEY (user_id) REFERENCES usuario(id),
   FOREIGN KEY (songs_id) REFERENCES cancoes(id),
-  PRIMARY KEY (data_reproducao, user_id, songs_id)
+  PRIMARY KEY (date_reproduction, user_id, songs_id)
 ) engine=InnoDB;
 
 CREATE TABLE following_artists(
@@ -143,7 +143,7 @@ VALUES
 (39, 'Baby', 136, 10),
 (40, 'You Make Me Feel So.', 83, 10);
 
-INSERT INTO reproducoes_por_usuario(data_reproducao, user_id, songs_id)
+INSERT INTO reproducoes_por_usuario(date_reproduction, user_id, songs_id)
 VALUES
 ('2020-02-28 10:45:55', 1, 36),
 ('2020-05-02 05:30:35', 1, 25),

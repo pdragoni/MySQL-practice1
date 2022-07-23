@@ -1,6 +1,6 @@
 SELECT
 	u.nome AS usuario,
-IF (MAX(rpu.data_reproducao) > "2021-%", "Usuário ativo", "Usuário inativo")
+IF (MAX(rpu.date_reproduction) > "2021-%", "Usuário ativo", "Usuário inativo")
 	AS condicao_usuario
 FROM SpotifyClone.usuario AS u
 LEFT JOIN SpotifyClone.reproducoes_por_usuario AS rpu
