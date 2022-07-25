@@ -5,57 +5,57 @@ CREATE DATABASE SpotifyClone;
 USE SpotifyClone;
 
 CREATE TABLE offered_plans(
-  id INT PRIMARY KEY AUTO_INCREMENT,
-	plano VARCHAR (100) NOT NULL,
-  prices DECIMAL(3,2) NOT NULL
+id INT PRIMARY KEY AUTO_INCREMENT,
+plano VARCHAR (100) NOT NULL,
+prices DECIMAL(3,2) NOT NULL
 ) engine = InnoDB;
 
 CREATE TABLE usuario(
-  id INT PRIMARY KEY AUTO_INCREMENT,
-	nome VARCHAR (100) NOT NULL,
-  age INT NOT NULL,
-  data_assinatura TIMESTAMP DEFAULT NOW(),
-  plan_id INT NOT NULL,
-  FOREIGN KEY (plan_id) REFERENCES offered_plans(id)
+id INT PRIMARY KEY AUTO_INCREMENT,
+nome VARCHAR (100) NOT NULL,
+age INT NOT NULL,
+data_assinatura TIMESTAMP DEFAULT NOW(),
+plan_id INT NOT NULL,
+FOREIGN KEY (plan_id) REFERENCES offered_plans(id)
 ) engine = InnoDB;
 
 CREATE TABLE artists(
-  id INT PRIMARY KEY AUTO_INCREMENT,
-  nome VARCHAR (100) NOT NULL
+id INT PRIMARY KEY AUTO_INCREMENT,
+nome VARCHAR (100) NOT NULL
 ) engine = InnoDB;
 
 CREATE TABLE albuns(
-  id INT PRIMARY KEY AUTO_INCREMENT,
-	album VARCHAR (100) NOT NULL,
-  release_year INT NOT NULL,
-  artist_id INT NOT NULL,
-  FOREIGN KEY (artist_id) REFERENCES artists(id)
+id INT PRIMARY KEY AUTO_INCREMENT,
+album VARCHAR (100) NOT NULL,
+release_year INT NOT NULL,
+artist_id INT NOT NULL,
+FOREIGN KEY (artist_id) REFERENCES artists(id)
 ) engine = InnoDB;
 
 CREATE TABLE cancoes(
-  id INT PRIMARY KEY AUTO_INCREMENT,
-	song VARCHAR (100) NOT NULL,
-  duration INT NOT NULL,
-  data_assinatura TIMESTAMP DEFAULT NOW(),
-  album_id INT NOT NULL,
-  FOREIGN KEY (album_id) REFERENCES albuns(id)
+id INT PRIMARY KEY AUTO_INCREMENT,
+song VARCHAR (100) NOT NULL,
+duration INT NOT NULL,
+data_assinatura TIMESTAMP DEFAULT NOW(),
+album_id INT NOT NULL,
+FOREIGN KEY (album_id) REFERENCES albuns(id)
 ) engine = InnoDB;
 
 CREATE TABLE reproducoes_por_usuario(
-  date_reproduction DATETIME NOT NULL,
-  user_id INT NOT NULL,
-  songs_id INT NOT NULL,
-  FOREIGN KEY (user_id) REFERENCES usuario(id),
-  FOREIGN KEY (songs_id) REFERENCES cancoes(id),
-  PRIMARY KEY (date_reproduction, user_id, songs_id)
+date_reproduction DATETIME NOT NULL,
+user_id INT NOT NULL,
+songs_id INT NOT NULL,
+FOREIGN KEY (user_id) REFERENCES usuario(id),
+FOREIGN KEY (songs_id) REFERENCES cancoes(id),
+PRIMARY KEY (date_reproduction, user_id, songs_id)
 ) engine=InnoDB;
 
 CREATE TABLE following_artists(
-  user_id INT NOT NULL,
-  artist_id INT NOT NULL,
-  FOREIGN KEY (user_id) REFERENCES usuario(id),
-  FOREIGN KEY (artist_id) REFERENCES artists(id),
-  PRIMARY KEY (user_id, artist_id)
+user_id INT NOT NULL,
+artist_id INT NOT NULL,
+FOREIGN KEY (user_id) REFERENCES usuario(id),
+FOREIGN KEY (artist_id) REFERENCES artists(id),
+PRIMARY KEY (user_id, artist_id)
 ) engine=InnoDB;
 
 INSERT INTO offered_plans(id, plano, prices)
@@ -103,45 +103,45 @@ VALUES
 INSERT INTO cancoes(song, duration, album_id)
 VALUES
 ("Soul For Us", 200, 1),
-    ("Reflections Of Magic", 163, 1),
-    ("Dance With Her Own", 116, 1),
-    ("Troubles Of My Inner Fire", 203, 1),
-    ("Time Fireworks", 152, 2),
-    ("Magic Circus", 105, 3),
-    ("Honey, So Do I", 207, 3),
-    ("Sweetie, Let's Go Wild", 139, 3),
-    ("She Knows", 244, 3),
-    ("Fantasy For Me", 100, 4),
-    ("Celebration Of More", 146, 4),
-    ("Rock His Everything", 223, 4),
-    ("Home Forever", 231, 4),
-    ("Diamond Power", 241, 4),
-    ("Let's Be Silly", 132, 4),
-    ("Thang Of Thunder", 240, 5),
-    ("Words Of Her Life", 185, 5),
-    ("Without My Streets", 176, 5),
-    ("Need Of The Evening", 190, 6),
-    ("History Of My Roses", 222, 6),
-    ("Without My Love", 111, 6),
-    ("Walking And Game", 123, 6),
-    ("Young And Father", 197, 6),
-    ("Finding My Traditions", 179, 7),
-    ("Walking And Man", 229, 7),
-    ("Hard And Time", 135, 7),
-    ("Honey, I'm A Lone Wolf", 150, 7),
-    ("She Thinks I Won't Stay Tonigh", 166, 8),
-    ("He Heard You're Bad For Me", 154, 8),
-    ("He Hopes We Can't Stay", 210, 8),
-    ("I Know I Know", 117, 8),
-    ("He's Walking Away", 159, 9),
-    ("He's Trouble", 138, 9),
-    ("I Heard I Want To Bo Alone", 120, 9),
-    ("I Ride Alone", 151, 9),
-    ("Honey", 79, 10),
-    ("You Cheated On Me", 95, 10),
-    ("Wouldn't It Be Nice", 213, 10),
-    ("Baby", 136, 10),
-    ("You Make Me Feel So..", 83, 10);
+("Reflections Of Magic", 163, 1),
+("Dance With Her Own", 116, 1),
+("Troubles Of My Inner Fire", 203, 1),
+("Time Fireworks", 152, 2),
+("Magic Circus", 105, 3),
+("Honey, So Do I", 207, 3),
+("Sweetie, Let's Go Wild", 139, 3),
+("She Knows", 244, 3),
+("Fantasy For Me", 100, 4),
+("Celebration Of More", 146, 4),
+("Rock His Everything", 223, 4),
+("Home Forever", 231, 4),
+("Diamond Power", 241, 4),
+("Let's Be Silly", 132, 4),
+("Thang Of Thunder", 240, 5),
+("Words Of Her Life", 185, 5),
+("Without My Streets", 176, 5),
+("Need Of The Evening", 190, 6),
+("History Of My Roses", 222, 6),
+("Without My Love", 111, 6),
+("Walking And Game", 123, 6),
+("Young And Father", 197, 6),
+("Finding My Traditions", 179, 7),
+("Walking And Man", 229, 7),
+("Hard And Time", 135, 7),
+("Honey, I'm A Lone Wolf", 150, 7),
+("She Thinks I Won't Stay Tonigh", 166, 8),
+("He Heard You're Bad For Me", 154, 8),
+("He Hopes We Can't Stay", 210, 8),
+("I Know I Know", 117, 8),
+("He's Walking Away", 159, 9),
+("He's Trouble", 138, 9),
+("I Heard I Want To Bo Alone", 120, 9),
+("I Ride Alone", 151, 9),
+("Honey", 79, 10),
+("You Cheated On Me", 95, 10),
+("Wouldn't It Be Nice", 213, 10),
+("Baby", 136, 10),
+("You Make Me Feel So..", 83, 10);
 
 INSERT INTO reproducoes_por_usuario(date_reproduction, user_id, songs_id)
 VALUES
